@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+	skip_before_filter :verify_authenticity_token
 	include ArticlesHelper
 	def index
 		@articles = Article.all
@@ -6,6 +7,8 @@ class ArticlesController < ApplicationController
 
 	def show
 		@article = Article.find(params[:id])
+		@comment = Comment.new
+		@comment.article_id = @article_id
 	end
 	def new
 		@article = Article.new
